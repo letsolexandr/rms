@@ -1,0 +1,148 @@
+version: '3'
+
+services:
+  # APPLICATION SECTION
+  web:
+    #restart: always
+    build: ./django
+    container_name: web
+    hostname: web
+    domainname: web
+    ports:
+      - "8089:8089"
+    volumes:
+      # - ./django:/opt/apps/mrs
+      - /var/mrs/media:/opt/apps/mrs/media
+      - /var/mrs/static:/opt/apps/mrs/static
+      - /var/mrs/certificates:/var/certificates
+    env_file:
+      - ./django/.env
+    environment:
+      DEBUG: 1
+    depends_on:
+      - postgres
+      - redis
+    entrypoint: ['/opt/apps/mrs/entrypoint.sh']
+
+  nginx:
+    restart: always
+    hostname: nginx
+    container_name: nginx
+    domainname: nginx
+    build: ./nginx/
+    ports:
+      - "443:443"
+      # - "80:80"
+    volumes:
+      - /var/mrs/media:/www/media
+      - /var/mrs/static:/www/static
+    depends_on:
+      - web
+
+
+  postgres:
+    restart: always
+    container_name: postgres
+    hostname: postgres
+    domainname: postgres
+    image: postgres:latest
+    ports:
+      - "5433:5432"
+    volumes:
+      - /var/mrs/pgdata:/var/lib/postgresql/data/
+    environment:
+      POSTGRES_USER: db_user
+      POSTGRES_DB: mrs
+      POSTGRES_PASSWORD: db_user
+      POSTGRES_HOST: postgres
+
+  redis:
+    restart: always
+    hostname: redis
+    container_name: redis
+    domainname: redis
+    image: redis:latest
+    ports:
+      - "6377:6379"
+    volumes:
+      - /var/mrs/redisdata:/data
+
+  celery:
+    build:
+      context: ./django
+    container_name: celery
+    restart: always
+    volumes:
+      - /var/mrs/media:/opt/apps/mrs/media
+      - /var/mrs/static:/opt/apps/mrs/static
+      - /var/mrs/certificates:/var/certificates
+    env_file:
+      - ./django/.env
+    environment:
+      DEBUG: 0
+    depends_on:
+      - postgres
+      - redis
+      - web
+    entrypoint: ['/opt/apps/mrs/celery_run.sh']
+  # celery_beat:
+  #   container_name: celery_beat
+  #   image: mrs
+  #   command: bash celery_beat_run.sh
+  #   network_mode: host
+  #   volumes:
+  #     - .:/app
+
+
+   # ELK Server
+  # logstash:
+  #   hostname: logstash
+  #   container_name: logstash
+  #   domainname: logstash
+  #   image: logstash:latest
+  #   restart: always
+  #   ports:
+  #      - 5044:5044
+  #      - 5959:5959
+  #      - 9600:9600
+  #   build:
+  #     context: ./logstash
+  #     dockerfile: Dockerfile
+  #   depends_on:
+  #     - elasticsearch
+  #   volumes:
+  #     - /var/mrs/logstash:/logs:ro
+
+  # elasticsearch:
+  #   hostname: elasticsearch
+  #   container_name: elasticsearch
+  #   domainname: elasticsearch
+  #   image: docker.elastic.co/elasticsearch/elasticsearch:7.9.1
+  #   restart: always
+  #   ports:
+  #    - 9200:9200
+  #    - 9300:9300
+  #   environment:
+  #     - discovery.type=single-node
+  #     - http.host=0.0.0.0
+  #     - xpack.security.enabled=false
+  #     - ES_JAVA_OPTS=-Xms750m -Xmx750m
+  #   volumes:
+  #     - /var/mrs/elasticsearch:/var/lib/elasticsearch/data
+
+  # kibana:
+  #   hostname: kibana
+  #   container_name: kibana
+  #   domainname: kibana
+  #   image: kibana:latest
+  #   build:
+  #     context: ./kibana
+  #     dockerfile: Dockerfile
+  #   restart: always
+  #   ports:
+  #     - 5601:5601
+  #   environment:
+  #     ELASTICSEARCH_URL: http://elasticsearch:9200
+  #   depends_on:
+  #     - elasticsearch
+  #     - logstash

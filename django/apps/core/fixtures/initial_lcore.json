@@ -1,0 +1,35 @@
+[
+    {
+      "model": "core.coreorganization",
+      "pk": 1,
+      "fields": {
+        "is_deleted": false,
+        "unique_uuid": "19f42cb3-6615-46c9-b876-a269c8a3e319",
+        "name": "ADMIN",
+        "full_name": "ADMIN",
+        "edrpou": "00000000"
+      }
+    },
+    {
+      "model": "core.coreuser",
+      "pk": 1,
+      "fields": {
+        "password": "pbkdf2_sha256$216000$XHvaAXUupOJ5$CWSLLClQj7FwFZFX4uhK0Di6EcE2sSPexUKsR5M/ILk=",
+        "last_login": "2020-11-13T16:01:23.310Z",
+        "is_superuser": true,
+        "username": "root",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2020-10-03T19:06:23.517Z",
+        "organization": 1,
+
+        "first_name": "root",
+        "last_name": "root",
+        "email": "root@gmail.com",
+
+        "groups": [],
+        "user_permissions": []
+      }
+    }
+  ]
+  

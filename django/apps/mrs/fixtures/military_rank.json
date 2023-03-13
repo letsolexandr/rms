@@ -1,0 +1,93 @@
+[
+  {
+    "model": "mrs.militaryrank",
+    "pk": 1,
+    "fields": {
+      "name": "Рядовий"
+    }
+  },
+  {
+    "model": "mrs.militaryrank",
+    "pk": 2,
+    "fields": {
+      "name": "Молодший сержант"
+    }
+  },
+  {
+    "model": "mrs.militaryrank",
+    "pk": 3,
+    "fields": {
+      "name": "Сержант"
+    }
+  },
+  {
+    "model": "mrs.militaryrank",
+    "pk": 4,
+    "fields": {
+      "name": "Старший сержант"
+    }
+  },
+  {
+    "model": "mrs.militaryrank",
+    "pk": 5,
+    "fields": {
+      "name": "Старший лейтенант"
+    }
+  },
+  {
+    "model": "mrs.militaryrank",
+    "pk": 6,
+    "fields": {
+      "name": "Капітан"
+    }
+  },
+  {
+    "model": "mrs.militaryrank",
+    "pk": 7,
+    "fields": {
+      "name": "Майор"
+    }
+  },
+  {
+    "model": "mrs.militaryrank",
+    "pk": 8,
+    "fields": {
+      "name": "Підполковник"
+    }
+  },
+  {
+    "model": "mrs.militaryrank",
+    "pk": 9,
+    "fields": {
+      "name": "Полковник"
+    }
+  },
+  {
+    "model": "mrs.militaryrank",
+    "pk": 10,
+    "fields": {
+      "name": "Генерал-майор"
+    }
+  },
+  {
+    "model": "mrs.militaryrank",
+    "pk": 11,
+    "fields": {
+      "name": "Генерал-лейтенант"
+    }
+  },
+  {
+    "model": "mrs.militaryrank",
+    "pk": 12,
+    "fields": {
+      "name": "Генерал-полковник"
+    }
+  },
+  {
+    "model": "mrs.militaryrank",
+    "pk": 13,
+    "fields": {
+      "name": "Генерал армії України"
+    }
+  }
+]

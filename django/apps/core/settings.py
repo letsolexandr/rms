@@ -1,0 +1,31 @@
+from django.conf import settings
+
+DERAULT_USER_COLORS = ["#CCD5AE",
+                       "#CDB4DB",
+                       "#F8AD9D",
+                       "#B6CCFE",
+                       "#D6CCC2",
+                       "#B8E0D2",
+                       "#A7BED3",
+                       "#F686BD",
+                       "#CFE795",
+                       "#C5D9E9",
+                       "#F2CD60",
+                       "#E5CDB0",
+                       "#FFBA78",
+                       "#D0B8AC",
+                       "#A0CED9",
+                       "#F08080",
+                       "#84DCC6",
+                       "#FFD97D",
+                       "#DEC0F1",
+                       "#C4DDC2",
+                       "#DEC7D8",
+                       "#74B4D8",
+                       "#ff5d8f",
+                       "#72ddf7",
+                       "#C1FBA4",
+                       "#d2e0bf",
+                       "#fff07c", ]
+
+USER_COLORS = getattr(settings, 'core_USER_COLORS', DERAULT_USER_COLORS)

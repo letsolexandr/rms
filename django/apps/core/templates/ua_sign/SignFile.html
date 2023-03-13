@@ -1,0 +1,60 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>ІІТ Користувач ЦСК-1. Тестовий підпис файлу (web-віджет)</title>
+
+	<!--
+		Підключення скрипта для взаємодії веб-сторінки з iframe, 
+		який завантажує сторінку SignWidget
+	-->
+	<script type="text/javascript" src="/static/core/js/eusign.js"></script>
+</head>
+<body>
+	<!--
+		Батківський елемент для відображення iframe, 
+		який завантажує сторінку SignWidget
+	-->
+	<div id="sign-widget-parent" style="width:700px;min-height:500px">
+</div>
+
+<script>
+
+//=============================================================================
+
+/*
+	Ідентифікатор батківського елементу для відображення iframe, 
+	який завантажує сторінку SignWidget
+*/
+const SIGN_WIDGET_PARENT_ID		= "sign-widget-parent";
+/*
+	Ідентифікатор iframe, який завантажує сторінку SignWidget
+*/
+const SIGN_WIDGET_ID			= "sign-widget";
+/*
+	URI з адресою за якою розташована сторінка SignWidget
+*/
+const SIGN_WIDGET_URI			= "https://id.gov.ua/sign-widget/v20220527/";
+
+//=============================================================================
+
+var formParams = new EndUser.FormParams();
+formParams.showSignTip = false;
+
+/*
+	Створення об'єкту типу EndUser для взаємодії з iframe, 
+	який завантажує сторінку SignWidget
+*/
+var euSign = new EndUser(
+	SIGN_WIDGET_PARENT_ID, 
+	SIGN_WIDGET_ID, 
+	SIGN_WIDGET_URI,
+	EndUser.FormType.SignFile,
+	formParams
+);
+
+//=============================================================================
+
+</script>
+</body>
+</html>
